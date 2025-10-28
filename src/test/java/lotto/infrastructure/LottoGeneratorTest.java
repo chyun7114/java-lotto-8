@@ -1,5 +1,6 @@
 package lotto.infrastructure;
 
+import lotto.infrastructure.generator.LottoGenerator;
 import lotto.model.Lottos;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
