@@ -1,8 +1,11 @@
 package lotto.config;
 
+import lotto.controller.LottoController;
 import lotto.infrastructure.generator.LottoGenerator;
 import lotto.infrastructure.validator.LottoInputValidator;
 import lotto.service.LottoService;
+import lotto.view.InputView;
+import lotto.view.OutputView;
 
 public class AppConfig {
 
@@ -13,14 +16,27 @@ public class AppConfig {
     }
 
     public static AppConfig getInstance() {
-        if(instance == null)
+        if (instance == null) {
             instance = new AppConfig();
+        }
 
         return instance;
     }
 
-    public LottoService lottoService() {
+    public LottoController lottoController() {
+        return new LottoController(lottoService(), inputView(), outputView(), lottoInputValidator());
+    }
+
+    private LottoService lottoService() {
         return new LottoService(lottoGenerator());
+    }
+
+    private InputView inputView() {
+        return new InputView();
+    }
+
+    private OutputView outputView() {
+        return new OutputView();
     }
 
     private LottoGenerator lottoGenerator() {

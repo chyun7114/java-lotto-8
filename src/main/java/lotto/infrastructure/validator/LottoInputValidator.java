@@ -7,12 +7,14 @@ public class LottoInputValidator {
     private static final int LOTTO_MAX_LIMIT = 50;
     private static final int LOTTO_PRICE_UNIT = 1000;
 
-    public void lottoPriceInputValidator(String userInput) {
+    public int lottoPriceInputValidator(String userInput) {
         int price = parseAndValidateNumeric(userInput);
 
         isNotNegativePrice(price);
         validateAmountUnit(price);
         exceedLottoPurchaseLimit(price);
+
+        return price;
     }
 
     private int parseAndValidateNumeric(String userInput) {
