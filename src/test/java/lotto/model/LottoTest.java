@@ -1,8 +1,7 @@
-package lotto;
+package lotto.model;
 
 import java.util.stream.Stream;
 import lotto.exception.LottoErrorCode;
-import lotto.model.Lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
