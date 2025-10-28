@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import lotto.exception.LottoErrorCode;
 
 public record Lotto(List<Integer> numbers) {
 
@@ -24,13 +25,13 @@ public record Lotto(List<Integer> numbers) {
 
     private void validateNull(List<Integer> numbers) {
         if (numbers == null) {
-            throw new IllegalArgumentException("[ERROR] 로또 번호는 null일 수 없습니다.");
+            throw LottoErrorCode.NUMBERS_IS_NOT_NULL.toException();
         }
     }
 
     private void validateSize(List<Integer> numbers) {
         if (numbers.size() != 6) {
-            throw new IllegalArgumentException("[ERROR] 로또 번호는 6개여야 합니다.");
+            throw LottoErrorCode.INVALID_SIZE.toException();
         }
     }
 
@@ -39,14 +40,14 @@ public record Lotto(List<Integer> numbers) {
                 .filter(this::isOutRangeLottoNumber)
                 .findAny()
                 .ifPresent((i) -> {
-                    throw new IllegalArgumentException("[ERROR] 로또 번호는 1~45 사이여야 합니다.");
+                    throw LottoErrorCode.LOTTO_NUMBERS_IS_IN_NOT_RANGE.toException();
                 });
     }
 
     private void validateDuplicates(List<Integer> numbers) {
         Set<Integer> uniqueNumbers = new HashSet<>(numbers);
         if (uniqueNumbers.size() != numbers.size()) {
-            throw new IllegalArgumentException("[ERROR] 로또 번호는 중복될 수 없습니다.");
+            throw LottoErrorCode.IS_NOT_DUPLICATES.toException();
         }
     }
 

@@ -1,6 +1,6 @@
 package lotto.infrastructure.validator;
 
-import lotto.exception.LottoErrorCode;
+import lotto.exception.UserInputErrorCode;
 
 public class LottoInputValidator {
     public int lottoPriceInputValidator(String userInput) {
@@ -14,13 +14,13 @@ public class LottoInputValidator {
         try {
             return Integer.parseInt(userInput);
         } catch (NumberFormatException e) {
-            throw LottoErrorCode.IS_NOT_NUMERIC_PRICE.toException();
+            throw UserInputErrorCode.IS_NOT_NUMERIC_PRICE.toException();
         }
     }
 
     private void isNotNegativePrice(int price) {
         if (price <= 0) {
-            throw LottoErrorCode.IS_NOT_NEGATIVE_PRICE.toException();
+            throw UserInputErrorCode.IS_NOT_NEGATIVE_PRICE.toException();
         }
     }
 }

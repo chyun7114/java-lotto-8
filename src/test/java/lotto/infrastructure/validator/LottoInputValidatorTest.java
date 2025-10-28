@@ -1,6 +1,6 @@
 package lotto.infrastructure.validator;
 
-import lotto.exception.LottoErrorCode;
+import lotto.exception.UserInputErrorCode;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -29,7 +29,7 @@ class LottoInputValidatorTest {
         void fail_is_not_numeric_price(String userInput) {
             assertThatThrownBy(() -> lottoInputValidator.lottoPriceInputValidator(userInput))
                     .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(LottoErrorCode.IS_NOT_NUMERIC_PRICE.getMessage());
+                    .hasMessage(UserInputErrorCode.IS_NOT_NUMERIC_PRICE.getMessage());
         }
 
         @ParameterizedTest
@@ -38,7 +38,7 @@ class LottoInputValidatorTest {
         void fail_is_not_positive_price(String userInput) {
             assertThatThrownBy(() -> lottoInputValidator.lottoPriceInputValidator(userInput))
                     .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(LottoErrorCode.IS_NOT_NEGATIVE_PRICE.getMessage());
+                    .hasMessage(UserInputErrorCode.IS_NOT_NEGATIVE_PRICE.getMessage());
         }
     }
 }

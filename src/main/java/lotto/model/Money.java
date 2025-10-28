@@ -1,6 +1,6 @@
 package lotto.model;
 
-import lotto.exception.LottoErrorCode;
+import lotto.exception.MoneyErrorCode;
 
 public class Money {
 
@@ -22,13 +22,13 @@ public class Money {
 
     private void validateAmountUnit(int amount) {
         if (isLottoPriceUnit(amount)) {
-            throw LottoErrorCode.PURCHASE_AMOUNT_NOT_DIVISIBLE_BY_THOUSAND.toException();
+            throw MoneyErrorCode.PURCHASE_AMOUNT_NOT_DIVISIBLE_BY_THOUSAND.toException();
         }
     }
 
     private void exceedLottoPurchaseLimit(int price) {
         if (getLottoCount(price) > LottoProperties.LOTTO_MAX_LIMIT) {
-            throw LottoErrorCode.EXCEED_LOTTO_PURCHASE_LIMIT.toException();
+            throw MoneyErrorCode.EXCEED_LOTTO_PURCHASE_LIMIT.toException();
         }
     }
 
