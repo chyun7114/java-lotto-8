@@ -23,7 +23,7 @@ public class LottoInputValidator {
     }
 
     private void isNotNegativePrice(int price) {
-        if (price < 0) {
+        if (price <= 0) {
             throw LottoErrorCode.IS_NOT_NEGATIVE_PRICE.toException();
         }
     }

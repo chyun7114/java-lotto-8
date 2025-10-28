@@ -1,6 +1,7 @@
 package lotto.exception;
 
 public enum LottoErrorCode implements BaseErrorCode<IllegalArgumentException> {
+
     IS_NOT_NUMERIC_PRICE("로또 구매 금액은 숫자만 입력 가능합니다."),
     IS_NOT_NEGATIVE_PRICE("로또 구매 금액은 양수여야 합니다."),
     PURCHASE_AMOUNT_NOT_DIVISIBLE_BY_THOUSAND("로또 구매 금액은 1,000원으로 나누어 떨어져야 합니다."),
@@ -20,6 +21,6 @@ public enum LottoErrorCode implements BaseErrorCode<IllegalArgumentException> {
 
     @Override
     public IllegalArgumentException toException() {
-        return new IllegalArgumentException(message);
+        return new IllegalArgumentException(getMessage());
     }
 }
