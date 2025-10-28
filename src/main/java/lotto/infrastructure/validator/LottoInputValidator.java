@@ -9,6 +9,7 @@ public class LottoInputValidator {
 
     public void lottoPriceInputValidator(String userInput) {
         int price = parseAndValidateNumeric(userInput);
+
         isNotNegativePrice(price);
         validateAmountUnit(price);
         exceedLottoPurchaseLimit(price);

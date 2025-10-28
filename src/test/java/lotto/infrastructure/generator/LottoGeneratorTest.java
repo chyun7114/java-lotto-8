@@ -1,7 +1,7 @@
-package lotto.infrastructure;
+package lotto.infrastructure.generator;
 
-import lotto.infrastructure.generator.LottoGenerator;
 import lotto.model.Lottos;
+import lotto.model.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -16,11 +16,11 @@ class LottoGeneratorTest {
     void success_lotto_generate() {
 
         // given
-        int testAmount = 10000;
+        Money testMoney = Money.from(10000);
         int expectedLottoCount = 10;
 
         // when
-        Lottos result = lottoGenerator.generateLotto(testAmount);
+        Lottos result = lottoGenerator.generateLotto(testMoney);
 
         // then
         assertThat(result.lottoList()).hasSize(expectedLottoCount);

@@ -1,14 +1,8 @@
 package lotto.model;
 
-public class Money {
+public record Money(int amount) {
 
-    private final int amount;
-
-    public Money(int amount) {
-        this.amount = amount;
-    }
-
-    public int getAmount() {
-        return this.amount;
+    public static Money from(int amount) {
+        return new Money(amount);
     }
 }

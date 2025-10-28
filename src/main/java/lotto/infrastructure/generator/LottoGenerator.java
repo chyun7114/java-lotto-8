@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.IntStream;
 import lotto.model.Lotto;
 import lotto.model.Lottos;
+import lotto.model.Money;
 
 public class LottoGenerator {
 
@@ -13,8 +14,8 @@ public class LottoGenerator {
     private static final int LOTTO_NUMBER_MIN = 1;
     private static final int LOTTO_NUMBER_MAX = 45;
 
-    public Lottos generateLotto(int amount) {
-        List<Lotto> lottoList = IntStream.range(0, getLottoCount(amount))
+    public Lottos generateLotto(Money money) {
+        List<Lotto> lottoList = IntStream.range(0, getLottoCount(money))
                 .mapToObj(i -> generateSingleLotto())
                 .toList();
 
@@ -25,8 +26,8 @@ public class LottoGenerator {
         return Lotto.from(getNumbers());
     }
 
-    private int getLottoCount(int amount) {
-        return amount / LOTTO_PRICE;
+    private int getLottoCount(Money money) {
+        return money.amount() / LOTTO_PRICE;
     }
 
     private List<Integer> getNumbers() {

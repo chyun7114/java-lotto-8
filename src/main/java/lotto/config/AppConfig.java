@@ -1,6 +1,7 @@
 package lotto.config;
 
 import lotto.infrastructure.generator.LottoGenerator;
+import lotto.infrastructure.validator.LottoInputValidator;
 import lotto.service.LottoService;
 
 public class AppConfig {
@@ -24,5 +25,9 @@ public class AppConfig {
 
     private LottoGenerator lottoGenerator() {
         return new LottoGenerator();
+    }
+
+    private LottoInputValidator lottoInputValidator() {
+        return new LottoInputValidator();
     }
 }
