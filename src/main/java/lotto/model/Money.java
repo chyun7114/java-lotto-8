@@ -21,7 +21,7 @@ public class Money {
     }
 
     private void validateAmountUnit(int amount) {
-        if (isLottoPriceUnit(amount)) {
+        if (isNotDIvisibleByLottoPriceUnit(amount)) {
             throw MoneyErrorCode.PURCHASE_AMOUNT_NOT_DIVISIBLE_BY_THOUSAND.toException();
         }
     }
@@ -32,8 +32,8 @@ public class Money {
         }
     }
 
-    private boolean isLottoPriceUnit(int amount) {
-        return amount % LottoProperties.LOTTO_PRICE_UNIT == 0;
+    private boolean isNotDIvisibleByLottoPriceUnit(int amount) {
+        return amount % LottoProperties.LOTTO_PRICE_UNIT != 0;
     }
 
     private int getLottoCount(int price) {
