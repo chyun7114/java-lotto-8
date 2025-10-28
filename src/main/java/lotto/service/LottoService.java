@@ -12,8 +12,7 @@ public class LottoService {
         this.lottoGenerator = lottoGenerator;
     }
 
-    public Lottos purchaseLottos(int purchaseAmount) {
-        Money money = Money.from(purchaseAmount);
+    public Lottos purchaseLottos(Money money) {
         return lottoGenerator.generateLotto(money);
     }
 }

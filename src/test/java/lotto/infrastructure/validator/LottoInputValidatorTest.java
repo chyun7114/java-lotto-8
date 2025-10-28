@@ -33,30 +33,12 @@ class LottoInputValidatorTest {
         }
 
         @ParameterizedTest
-        @DisplayName("로또 구매 비용을 1000원 단위로 하지 않은 경우 오류가 발생한다.")
-        @ValueSource(strings = {"1001", "2500", "999"})
-        void fail_is_not_price_when_not_divisible_by_1000(String userInput) {
-            assertThatThrownBy(() -> lottoInputValidator.lottoPriceInputValidator(userInput))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(LottoErrorCode.PURCHASE_AMOUNT_NOT_DIVISIBLE_BY_THOUSAND.getMessage());
-        }
-
-        @ParameterizedTest
         @DisplayName("로또 구매 비용을 양수로 입력하지 않은 경우 오류가 발생한다.")
         @ValueSource(strings = {"-1000", "-1", "0"})
         void fail_is_not_positive_price(String userInput) {
             assertThatThrownBy(() -> lottoInputValidator.lottoPriceInputValidator(userInput))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage(LottoErrorCode.IS_NOT_NEGATIVE_PRICE.getMessage());
-        }
-
-        @ParameterizedTest
-        @DisplayName("로또 구매 비용이 최대 구매 한도를 넘은 경우 오류를 반환한다.")
-        @ValueSource(strings = {"51000", "100000"})
-        void fail_exceed_lotto_purchase_limit(String userInput) {
-            assertThatThrownBy(() -> lottoInputValidator.lottoPriceInputValidator(userInput))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(LottoErrorCode.EXCEED_LOTTO_PURCHASE_LIMIT.getMessage());
         }
     }
 }

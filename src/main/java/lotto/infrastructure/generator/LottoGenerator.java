@@ -27,7 +27,7 @@ public class LottoGenerator {
     }
 
     private int getLottoCount(Money money) {
-        return money.amount() / LOTTO_PRICE;
+        return money.getAmount() / LOTTO_PRICE;
     }
 
     private List<Integer> getNumbers() {

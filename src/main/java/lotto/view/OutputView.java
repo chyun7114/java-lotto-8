@@ -13,7 +13,7 @@ public class OutputView {
 
     public void printPurchasesLottos(Lottos lottos) {
         for(Lotto lotto : lottos.lottoList()) {
-            System.out.println(lotto);
+            System.out.println(lotto.numbers().toString());
         }
     }
 }

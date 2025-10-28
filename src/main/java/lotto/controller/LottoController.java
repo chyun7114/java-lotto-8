@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.infrastructure.validator.LottoInputValidator;
 import lotto.model.Lottos;
+import lotto.model.Money;
 import lotto.service.LottoService;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -26,7 +27,7 @@ public class LottoController {
     public void purchase() {
         String priceInput = inputView.inputPurchasePrice();
         int price = lottoInputValidator.lottoPriceInputValidator(priceInput);
-        Lottos lottos = lottoService.purchaseLottos(price);
+        Lottos lottos = lottoService.purchaseLottos(Money.from(price));
 
         outputView.printPurchaseCount(lottos.lottoList().size());
         outputView.printPurchasesLottos(lottos);

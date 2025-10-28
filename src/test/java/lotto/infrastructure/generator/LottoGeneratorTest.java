@@ -25,7 +25,7 @@ class LottoGeneratorTest {
         // then
         assertThat(result.lottoList()).hasSize(expectedLottoCount);
         assertThat(result.lottoList()).allSatisfy(lotto -> {
-            assertThat(lotto.getNumbers()).allMatch(number -> number >= 1 && number <= 45);
+            assertThat(lotto.numbers()).allMatch(number -> number >= 1 && number <= 45);
         });
     }
 }
