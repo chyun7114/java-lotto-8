@@ -1,6 +1,8 @@
 package lotto.controller;
 
+import java.util.List;
 import lotto.infrastructure.validator.LottoInputValidator;
+import lotto.model.LotteryNumber;
 import lotto.model.Lottos;
 import lotto.model.Money;
 import lotto.service.LottoService;
@@ -24,12 +26,42 @@ public class LottoController {
         this.lottoInputValidator = lottoInputValidator;
     }
 
-    public void purchase() {
+    public void run() {
+        Lottos lottos = purchaseLottos();
+        LotteryNumber lotteryNumber = drawLotteryNumbers();
+    }
+
+    private Lottos purchaseLottos() {
+        Money money = askMoney();
+        Lottos lottos = lottoService.purchaseLottos(money);
+        printPurchaseResult(lottos);
+        return lottos;
+    }
+
+    private Money askMoney() {
         String priceInput = inputView.inputPurchasePrice();
         int price = lottoInputValidator.lottoPriceInputValidator(priceInput);
-        Lottos lottos = lottoService.purchaseLottos(Money.from(price));
+        return Money.from(price);
+    }
 
+    private void printPurchaseResult(Lottos lottos) {
         outputView.printPurchaseCount(lottos.lottoList().size());
         outputView.printPurchasesLottos(lottos);
+    }
+
+    private LotteryNumber drawLotteryNumbers() {
+        List<Integer> winningNumbers = askingWInningNumbers();
+        int bonusNumber = askBonusNumber();
+        return lottoService.createLotteryNumber(winningNumbers, bonusNumber);
+    }
+
+    private List<Integer> askingWInningNumbers() {
+        String winningNumbersInput = inputView.inputWinningNumber();
+        return lottoInputValidator.winningNumberValidator(winningNumbersInput);
+    }
+
+    private int askBonusNumber() {
+        String bonusNumberInput = inputView.inputBounsNumber();
+        return lottoInputValidator.bonusNumberValidator(bonusNumberInput);
     }
 }
