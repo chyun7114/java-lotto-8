@@ -1,6 +1,8 @@
 package lotto.service;
 
+import java.util.List;
 import lotto.infrastructure.generator.LottoGenerator;
+import lotto.model.LotteryNumber;
 import lotto.model.Lottos;
 import lotto.model.Money;
 
@@ -14,5 +16,9 @@ public class LottoService {
 
     public Lottos purchaseLottos(Money money) {
         return lottoGenerator.generateLotto(money);
+    }
+
+    public LotteryNumber createLotteryNumber(List<Integer> winningNumbers, int bonusNumber) {
+        return LotteryNumber.from(winningNumbers, bonusNumber);
     }
 }

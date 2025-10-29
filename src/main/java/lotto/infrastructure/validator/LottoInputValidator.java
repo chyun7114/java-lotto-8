@@ -3,6 +3,7 @@ package lotto.infrastructure.validator;
 import lotto.exception.UserInputErrorCode;
 
 public class LottoInputValidator {
+
     public int lottoPriceInputValidator(String userInput) {
         int price = parseAndValidateNumeric(userInput);
         isNotNegativePrice(price);
