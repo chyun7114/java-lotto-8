@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import java.util.List;
+import lotto.infrastructure.parser.LottoInputParser;
 import lotto.infrastructure.validator.LottoInputValidator;
 import lotto.model.LotteryNumber;
 import lotto.model.Lottos;
@@ -57,7 +58,8 @@ public class LottoController {
 
     private List<Integer> askingWInningNumbers() {
         String winningNumbersInput = inputView.inputWinningNumber();
-        return lottoInputValidator.winningNumberValidator(winningNumbersInput);
+        lottoInputValidator.winningNumberValidator(winningNumbersInput);
+        return LottoInputParser.parseWinningNumbers(winningNumbersInput);
     }
 
     private int askBonusNumber() {

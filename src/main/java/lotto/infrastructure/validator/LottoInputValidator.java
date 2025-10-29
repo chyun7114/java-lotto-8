@@ -2,7 +2,6 @@ package lotto.infrastructure.validator;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 import lotto.exception.UserInputErrorCode;
 
 public class LottoInputValidator {
@@ -28,15 +27,27 @@ public class LottoInputValidator {
         }
     }
 
-    public List<Integer> winningNumberValidator(String userInput) {
-        try {
-            return Arrays.stream(userInput.split(","))
-                    .map(String::trim)
-                    .map(Integer::parseInt)
-                    .collect(Collectors.toList());
-        } catch (NumberFormatException e) {
+    public void winningNumberValidator(String userInput) {
+        validateEndsWIthDelimeter(userInput);
+        validateNoblankInNumbers(userInput);
+    }
+
+    private void validateEndsWIthDelimeter(String userInput) {
+        if (userInput.startsWith(",") || userInput.endsWith(",")) {
             throw UserInputErrorCode.WINNING_NUMBERS_NOT_NUMERIC.toException();
         }
+    }
+
+    private void validateNoblankInNumbers(String userInput) {
+        String[] numbers = userInput.split(",");
+        if (checkHasBlank(numbers)) {
+            throw UserInputErrorCode.WINNING_NUMBERS_NOT_NUMERIC.toException();
+        }
+    }
+
+    private boolean checkHasBlank(String[] numbers) {
+        return Arrays.stream(numbers)
+                .anyMatch(s -> s.isBlank() || s.contains(" "));
     }
 
     public int bonusNumberValidator(String userInput) {
