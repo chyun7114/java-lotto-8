@@ -1,6 +1,8 @@
 package lotto.exception;
 
-public enum UserInputErrorCode implements BaseErrorCode<IllegalArgumentException>{
+import lotto.config.BaseErrorCode;
+
+public enum UserInputErrorCode implements BaseErrorCode<IllegalArgumentException> {
 
     IS_NOT_NUMERIC_PRICE("로또 구매 금액은 숫자만 입력 가능합니다."),
     IS_NOT_NEGATIVE_PRICE("로또 구매 금액은 양수여야 합니다."),

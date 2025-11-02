@@ -1,5 +1,7 @@
 package lotto.exception;
 
+import lotto.config.BaseErrorCode;
+
 public enum MoneyErrorCode implements BaseErrorCode<IllegalArgumentException> {
 
     PURCHASE_AMOUNT_NOT_DIVISIBLE_BY_THOUSAND("로또 구매 금액은 1,000원으로 나누어 떨어져야 합니다."),

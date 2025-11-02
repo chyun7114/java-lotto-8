@@ -1,5 +1,7 @@
 package lotto.exception;
 
+import lotto.config.BaseErrorCode;
+
 public enum LottoErrorCode implements BaseErrorCode<IllegalArgumentException> {
 
     NUMBERS_IS_NOT_NULL("로또 번호는 null일 수 없습니다."),
