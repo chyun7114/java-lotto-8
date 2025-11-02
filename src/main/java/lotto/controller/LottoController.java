@@ -6,6 +6,7 @@ import lotto.infrastructure.validator.LottoInputValidator;
 import lotto.model.LotteryNumber;
 import lotto.model.Lottos;
 import lotto.model.Money;
+import lotto.model.Statistics;
 import lotto.service.LottoService;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -30,6 +31,7 @@ public class LottoController {
     public void run() {
         Lottos lottos = purchaseLottos();
         LotteryNumber lotteryNumber = drawLotteryNumbers();
+        Statistics statistics = getLottoStatistics(lottos, lotteryNumber);
     }
 
     private Lottos purchaseLottos() {
@@ -65,5 +67,9 @@ public class LottoController {
     private int askBonusNumber() {
         String bonusNumberInput = inputView.inputBounsNumber();
         return lottoInputValidator.bonusNumberValidator(bonusNumberInput);
+    }
+
+    private Statistics getLottoStatistics(Lottos lottos, LotteryNumber lotteryNumber) {
+        return lottoService.calculateWinningResult(lottos, lotteryNumber);
     }
 }
