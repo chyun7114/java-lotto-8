@@ -2,12 +2,26 @@ package lotto.model;
 
 import java.util.Map;
 
-public record LottoResult(
-    Statistics statistics,
-    double profitRate
-) {
-    private double calculateProfitRate(Statistics statistics, Money money) {
+public class LottoResult {
+
+    private final Statistics statistics;
+    private final double profitRate;
+
+    public LottoResult(Statistics statistics, Lottos lottos) {
+        this.statistics = statistics;
+        this.profitRate = calculateProfitRate(statistics, lottos);
+    }
+
+    private double calculateProfitRate(Statistics statistics, Lottos lottos) {
         long totalPrize = statistics.calculateTotalPrize();
-        return (double) totalPrize / money.getAmount() * 100;
+        return (double) totalPrize / lottos.getLottoPrice() * 100;
+    }
+
+    public Statistics getStatistics() {
+        return statistics;
+    }
+
+    public double getProfitRate() {
+        return profitRate;
     }
 }
