@@ -59,4 +59,21 @@ public record Lotto(List<Integer> numbers) {
     public static Lotto from(List<Integer> numbers) {
         return new Lotto(numbers);
     }
+
+    public WinningRank calculateRank(LotteryNumber lotteryNumber) {
+        int matchCount = getMatchWinningNumberInLotto(lotteryNumber.winningNumbers());
+        boolean bonusMatch = isMatchBonusNumber(lotteryNumber.bonusNumber());
+        return WinningRank.valueOf(matchCount, bonusMatch);
+    }
+
+    private int getMatchWinningNumberInLotto(List<Integer> winningNumbers) {
+        return (int) numbers.stream()
+                .filter(winningNumbers::contains)
+                .count();
+    }
+
+    private boolean isMatchBonusNumber(int bonusNumber) {
+        return numbers.stream()
+                .anyMatch(number -> number == bonusNumber);
+    }
 }
