@@ -1,7 +1,5 @@
 package lotto.model;
 
-import java.util.Map;
-
 public class LottoResult {
 
     private final Statistics statistics;
@@ -14,7 +12,7 @@ public class LottoResult {
 
     private double calculateProfitRate(Statistics statistics, Lottos lottos) {
         long totalPrize = statistics.calculateTotalPrize();
-        return (double) totalPrize / lottos.getLottoPrice() * 100;
+        return (((double) totalPrize / lottos.getLottoPrice()) * 100);
     }
 
     public Statistics getStatistics() {

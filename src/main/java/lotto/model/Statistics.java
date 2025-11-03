@@ -25,8 +25,8 @@ public record Statistics(Map<WinningRank, Integer> statistics) {
     }
 
     public long calculateTotalPrize() {
-        return statistics.keySet().stream()
-                .mapToLong(rank -> (long) rank.getPrizeMoney())
+        return statistics.entrySet().stream()
+                .mapToLong(entry -> (long) entry.getKey().getPrizeMoney() * entry.getValue())
                 .sum();
     }
 

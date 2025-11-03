@@ -10,7 +10,7 @@ public enum WinningRank {
     THIRD(5, 1_500_000, (matchCount, bonusMatch) -> matchCount == 5 && !bonusMatch),
     FOURTH(4, 50_000, (matchCount, bonusMatch) -> matchCount == 4),
     FIFTH(3, 5_000, (matchCount, bonusMatch) -> matchCount == 3),
-    MISS(3, 5_000, (matchCount, bonusMatch) -> matchCount < 3);
+    MISS(0, 0, (matchCount, bonusMatch) -> matchCount < 3);
 
     private final int matchCount;
     private final int prizeMoney;
