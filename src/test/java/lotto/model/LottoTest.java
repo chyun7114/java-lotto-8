@@ -84,4 +84,107 @@ class LottoTest {
             );
         }
     }
+
+    @Nested
+    @DisplayName("당첨 결과 정상 반환 테스트")
+    class WinningLottoTest {
+
+        @Test
+        @DisplayName("3개 미만으로 일치하는 경우 MISS를 반환한다.")
+        void success_return_miss() {
+            // given
+            Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+            LotteryNumber lotteryNumber = LotteryNumber.from(List.of(7, 8, 9, 10, 11, 12), 13);
+
+            // when
+            WinningRank result = lotto.calculateRank(lotteryNumber);
+
+            // then
+            assertThat(result).isEqualTo(WinningRank.MISS);
+        }
+
+        @Test
+        @DisplayName("3개 일치하는 경우 5등을 반환한다.")
+        void success_return_fifth() {
+            // given
+            Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+            LotteryNumber lotteryNumber = LotteryNumber.from(List.of(1, 2, 3, 10, 11, 12), 13);
+
+            // when
+            WinningRank result = lotto.calculateRank(lotteryNumber);
+
+            // then
+            assertThat(result).isEqualTo(WinningRank.FIFTH);
+        }
+
+        @Test
+        @DisplayName("4개 일치하는 경우 4등을 반환한다.")
+        void success_return_fourth() {
+            // given
+            Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+            LotteryNumber lotteryNumber = LotteryNumber.from(List.of(1, 2, 3, 4, 11, 12), 13);
+
+            // when
+            WinningRank result = lotto.calculateRank(lotteryNumber);
+
+            // then
+            assertThat(result).isEqualTo(WinningRank.FOURTH);
+        }
+
+        @Test
+        @DisplayName("5개 일치하는 경우 3등을 반환한다.")
+        void success_return_third() {
+            // given
+            Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+            LotteryNumber lotteryNumber = LotteryNumber.from(List.of(1, 2, 3, 4, 5, 12), 13);
+
+            // when
+            WinningRank result = lotto.calculateRank(lotteryNumber);
+
+            // then
+            assertThat(result).isEqualTo(WinningRank.THIRD);
+        }
+
+        @Test
+        @DisplayName("5개의 숫자와 보너스 숫자가 일치하는 경우 2등을 반환한다.")
+        void success_return_second() {
+            // given
+            Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+            LotteryNumber lotteryNumber = LotteryNumber.from(List.of(1, 2, 3, 4, 5, 12), 6);
+
+            // when
+            WinningRank result = lotto.calculateRank(lotteryNumber);
+
+            // then
+            assertThat(result).isEqualTo(WinningRank.SECOND);
+        }
+
+        @Test
+        @DisplayName("모든 숫자가 맞는 경우 1등을 반환한다.")
+        void success_return_first() {
+            // given
+            Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+            LotteryNumber lotteryNumber = LotteryNumber.from(List.of(1, 2, 3, 4, 5, 6), 13);
+
+            // when
+            WinningRank result = lotto.calculateRank(lotteryNumber);
+
+            // then
+            assertThat(result).isEqualTo(WinningRank.FIRST);
+        }
+
+        @Test
+        @DisplayName("보너스 숫자가 맞더라도 2등을 제외하고는 순위 산정에 추가되지 않는다")
+        void success_if_bonus_number_match_but_not_count() {
+            // given
+            Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+            LotteryNumber lotteryNumber = LotteryNumber.from(List.of(1, 2, 3, 4, 7, 8), 6);
+
+            // when
+            WinningRank result = lotto.calculateRank(lotteryNumber);
+
+            // then
+            assertThat(result).isEqualTo(WinningRank.FOURTH);
+        }
+    }
 }
