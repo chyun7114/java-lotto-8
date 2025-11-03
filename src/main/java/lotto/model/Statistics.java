@@ -1,6 +1,5 @@
 package lotto.model;
 
-import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
 
@@ -28,9 +27,5 @@ public record Statistics(Map<WinningRank, Integer> statistics) {
         return statistics.entrySet().stream()
                 .mapToLong(entry -> (long) entry.getKey().getPrizeMoney() * entry.getValue())
                 .sum();
-    }
-
-    public Map<WinningRank, Integer> getStatistics() {
-        return Collections.unmodifiableMap(statistics);
     }
 }
