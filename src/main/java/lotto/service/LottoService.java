@@ -26,16 +26,6 @@ public class LottoService {
     }
 
     public Statistics calculateWinningResult(Lottos lottos, LotteryNumber lotteryNumber) {
-        return calculateStatistics(lottos, lotteryNumber);
-    }
-
-    private Statistics calculateStatistics(Lottos lottos, LotteryNumber lotteryNumber) {
-        Statistics statistics = Statistics.createEmpty();
-        for(Lotto lotto : lottos.lottoList()) {
-            WinningRank rank = lotto.calculateRank(lotteryNumber);
-            statistics.putRank(rank);
-        }
-
-        return statistics;
+        return lottos.calculateStatistics(lotteryNumber);
     }
 }
