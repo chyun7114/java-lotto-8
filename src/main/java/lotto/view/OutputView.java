@@ -63,6 +63,8 @@ public class OutputView {
     }
 
     private <T extends Number> String numberFormat(T number) {
-        return NumberFormat.getInstance().format(number);
+        NumberFormat formatter = NumberFormat.getInstance();
+        formatter.setMaximumFractionDigits(1);
+        return formatter.format(number);
     }
 }

@@ -8,7 +8,7 @@ public enum PrintingFormatEnum {
 
     OUTPUT_PURCHASED_COUNT_STRING("%d개를 구매했습니다.\n"),
     OUTPUT_WINNIG_STATISTICS_HEADER("당첨 통계\n---"),
-    OUTPUT_PROFIT_RATE_MESSAGE("총 수익률은 %.1f%%입니다."),
+    OUTPUT_PROFIT_RATE_MESSAGE("총 수익률은 %s%%입니다."),
     OUTPUT_WINNING_LOTTO_COUNT_MESSAGE("%s - %d개\n"),
     OUTPUT_BONUS_COUNT_MESSAGE("%d개 일치, 보너스 볼 일치 (%s원)"),
     OUTPUT_NORMAL_COUNT_MESSAGE("%d개 일치 (%s원)"),
