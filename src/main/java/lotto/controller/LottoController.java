@@ -30,23 +30,26 @@ public class LottoController {
     }
 
     public void run() {
-        Lottos lottos = purchaseLottos();
+        Money money = askMoney();
+        Lottos lottos = lottoService.purchaseLottos(money);
+        printPurchaseResult(lottos);
+
         LotteryNumber lotteryNumber = drawLotteryNumbers();
+
         LottoResult lottoResult = getLottoStatistics(lottos, lotteryNumber);
         outputView.printLottoResult(lottoResult);
     }
 
-    private Lottos purchaseLottos() {
-        Money money = askMoney();
-        Lottos lottos = lottoService.purchaseLottos(money);
-        printPurchaseResult(lottos);
-        return lottos;
-    }
-
     private Money askMoney() {
-        String priceInput = inputView.inputPurchasePrice();
-        int price = lottoInputValidator.lottoPriceInputValidator(priceInput);
-        return Money.from(price);
+        while (true) {
+            try {
+                String priceInput = inputView.inputPurchasePrice();
+                int price = lottoInputValidator.lottoPriceInputValidator(priceInput);
+                return Money.from(price);
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     private void printPurchaseResult(Lottos lottos) {
@@ -55,9 +58,15 @@ public class LottoController {
     }
 
     private LotteryNumber drawLotteryNumbers() {
-        List<Integer> winningNumbers = askingWInningNumbers();
-        int bonusNumber = askBonusNumber();
-        return lottoService.createLotteryNumber(winningNumbers, bonusNumber);
+        while (true) {
+            try {
+                List<Integer> winningNumbers = askingWInningNumbers();
+                int bonusNumber = askBonusNumber();
+                return lottoService.createLotteryNumber(winningNumbers, bonusNumber);
+            } catch(IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     private List<Integer> askingWInningNumbers() {
