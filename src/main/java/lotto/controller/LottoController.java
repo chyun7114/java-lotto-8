@@ -33,6 +33,7 @@ public class LottoController {
         Lottos lottos = purchaseLottos();
         LotteryNumber lotteryNumber = drawLotteryNumbers();
         LottoResult lottoResult = getLottoStatistics(lottos, lotteryNumber);
+        outputView.printLottoResult(lottoResult);
     }
 
     private Lottos purchaseLottos() {
