@@ -30,34 +30,39 @@ public class OutputView {
         Arrays.stream(WinningRank.values())
                 .filter(rank -> rank != WinningRank.MISS)
                 .sorted(Comparator.comparing(WinningRank::getPrizeMoney))
-                .forEach(rank -> {
-                    String message = formatRankMessage(rank);
-                    int count = statistics.getCount(rank);
-                    System.out.printf(
-                            PrintingFormatEnum.OUTPUT_WINNING_LOTTO_COUNT_MESSAGE.getFormat(),
-                            message,
-                            count
-                    );
-                });
+                .forEach(rank -> printRankResult(rank, statistics));
+    }
+
+    private void printRankResult(WinningRank rank, Statistics statistics) {
+        String message = formatRankMessage(rank);
+        int count = statistics.getCount(rank);
+        System.out.printf(
+                PrintingFormatEnum.OUTPUT_WINNING_LOTTO_COUNT_MESSAGE.getFormat(),
+                message,
+                count
+        );
     }
 
     private String formatRankMessage(WinningRank rank) {
-        String prizeMoney = NumberFormat.getInstance().format(rank.getPrizeMoney());
         if (rank == WinningRank.SECOND) {
             return String.format(
                     PrintingFormatEnum.OUTPUT_BONUS_COUNT_MESSAGE.getFormat(),
                     rank.getMatchCount(),
-                    prizeMoney
+                    numberFormat(rank.getPrizeMoney())
             );
         }
         return String.format(
                 PrintingFormatEnum.OUTPUT_NORMAL_COUNT_MESSAGE.getFormat(),
                 rank.getMatchCount(),
-                prizeMoney
+                numberFormat(rank.getPrizeMoney())
         );
     }
 
     private void printProfitRate(double profitRate) {
-        System.out.printf(PrintingFormatEnum.OUTPUT_PROFIT_RATE_MESSAGE.getFormat(), profitRate);
+        System.out.printf(PrintingFormatEnum.OUTPUT_PROFIT_RATE_MESSAGE.getFormat(), numberFormat(profitRate));
+    }
+
+    private <T extends Number> String numberFormat(T number) {
+        return NumberFormat.getInstance().format(number);
     }
 }
