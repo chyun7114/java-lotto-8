@@ -5,14 +5,14 @@ public class LottoResult {
     private final Statistics statistics;
     private final double profitRate;
 
-    public LottoResult(Statistics statistics, Lottos lottos) {
+    public LottoResult(Statistics statistics, Money money) {
         this.statistics = statistics;
-        this.profitRate = calculateProfitRate(statistics, lottos);
+        this.profitRate = calculateProfitRate(statistics, money);
     }
 
-    private double calculateProfitRate(Statistics statistics, Lottos lottos) {
+    private double calculateProfitRate(Statistics statistics, Money money) {
         long totalPrize = statistics.calculateTotalPrize();
-        return (((double) totalPrize / lottos.getLottoPrice()) * 100);
+        return (((double) totalPrize / money.getAmount()) * 100);
     }
 
     public Statistics getStatistics() {

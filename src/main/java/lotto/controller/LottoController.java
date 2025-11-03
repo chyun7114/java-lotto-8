@@ -36,8 +36,13 @@ public class LottoController {
 
         LotteryNumber lotteryNumber = drawLotteryNumbers();
 
-        LottoResult lottoResult = getLottoStatistics(lottos, lotteryNumber);
+        LottoResult lottoResult = getLottoStatistics(lottos, lotteryNumber, money);
         outputView.printLottoResult(lottoResult);
+    }
+
+    private void printPurchaseResult(Lottos lottos) {
+        outputView.printPurchaseCount(lottos.lottoList().size());
+        outputView.printPurchasesLottos(lottos);
     }
 
     private Money askMoney() {
@@ -52,18 +57,13 @@ public class LottoController {
         }
     }
 
-    private void printPurchaseResult(Lottos lottos) {
-        outputView.printPurchaseCount(lottos.lottoList().size());
-        outputView.printPurchasesLottos(lottos);
-    }
-
     private LotteryNumber drawLotteryNumbers() {
         while (true) {
             try {
                 List<Integer> winningNumbers = askingWInningNumbers();
                 int bonusNumber = askBonusNumber();
                 return lottoService.createLotteryNumber(winningNumbers, bonusNumber);
-            } catch(IllegalArgumentException e) {
+            } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
         }
@@ -80,8 +80,10 @@ public class LottoController {
         return lottoInputValidator.bonusNumberValidator(bonusNumberInput);
     }
 
-    private LottoResult getLottoStatistics(Lottos lottos, LotteryNumber lotteryNumber) {
+    private LottoResult getLottoStatistics(
+            Lottos lottos, LotteryNumber lotteryNumber, Money money
+    ) {
         Statistics statistics = lottoService.calculateWinningResult(lottos, lotteryNumber);
-        return new LottoResult(statistics, lottos);
+        return new LottoResult(statistics, money);
     }
 }
